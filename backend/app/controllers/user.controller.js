@@ -4,7 +4,9 @@ const User = require("../models/user.model");
 
 const registerUser = asyncHandler(async (req, res) => {
   const { user } = req.body;
+  console.log(user);
   if (!user || !user.username || !user.password) {
+    console.log("1.aqui");
     return res.status(400).json({ message: "Todos los campos son requeridos" });
   }
   const userNameExists = await User.findOne({ username: user.username }).exec();
@@ -12,12 +14,15 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.status(409).json({ message: "El nombre de usuario ya existe" });
   }
   if (!/^[a-zA-Z0-9_]+$/.test(user.username)) {
+    console.log("2.aqui");
     return res.status(400).json({ message: "El nombre de usuario solo puede contener letras, números y guiones bajos" });
   }
   if (user.username.length < 3) {
+    console.log("3.aqui");
     return res.status(400).json({ message: "El nombre debe tener al menos 6 caracteres" });
   }
   if (user.password.length < 6) {
+    console.log("4.aqui");
     return res.status(400).json({ message: "La contraseña debe tener al menos 6 caracteres" });
   }
   const hashedPwd = await argon2.hash(user.password);
