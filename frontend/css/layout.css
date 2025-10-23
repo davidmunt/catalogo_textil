@@ -1,0 +1,140 @@
+/* ====== RESET Y BASE ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f5f7fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ====== HEADER ====== */
+.main-header {
+  width: 100%;
+  background-color: #0078ff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.main-header .logo {
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  user-select: none;
+  transition: transform 0.2s ease;
+}
+
+.main-header .logo:hover {
+  transform: scale(1.05);
+}
+
+/* ====== NAVIGATION ====== */
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-links button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.nav-links button:hover {
+  background-color: white;
+  color: #0078ff;
+}
+
+/* ====== USER ZONE ====== */
+.user-zone {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid white;
+}
+
+.user-zone button {
+  background-color: white;
+  color: #0078ff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.user-zone button:hover {
+  background-color: #005fcc;
+  color: white;
+}
+
+/* ====== FOOTER ====== */
+.main-footer {
+  background-color: #222;
+  color: #ccc;
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+.main-footer p:first-child {
+  color: #aaa;
+  margin-bottom: 5px;
+}
+
+.main-footer p:last-child {
+  color: #0078ff;
+  font-weight: 500;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .user-zone {
+    flex-direction: column;
+  }
+}

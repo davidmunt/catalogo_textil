@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Login - Catálogo Textil</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/producto.css" />
+  </head>
+  <body>
+    <div class="product-container" id="product-container"></div>
+  </body>
+  <script type="module">
+    import { Layout } from "./js/layout.js";
+    import { Product } from "./js/producto.js";
+    const layout = new Layout();
+    const product = new Product();
+    layout.paintHeader();
+    (async () => {
+      await product.init();
+      product.paintProduct();
+      layout.paintFooter();
+    })();
+  </script>
+</html>

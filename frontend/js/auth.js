@@ -45,7 +45,6 @@ export class Auth {
       };
     }
     try {
-      console.log(username + password);
       const response = await api.userRegister(username, password);
       return { success: true, data: response };
     } catch (error) {
@@ -81,7 +80,7 @@ export class Auth {
         let errorMessage = document.getElementById("form-error");
         errorMessage.textContent = "";
         localStorage.setItem("User", JSON.stringify(result.data));
-        window.location.href = "index.html";
+        window.location.href = "home.html";
       }
     });
     const registerLink = document.getElementById("register-link");
@@ -117,7 +116,7 @@ export class Auth {
         let errorMessage = document.getElementById("form-error");
         errorMessage.textContent = "";
         localStorage.setItem("User", JSON.stringify(result.data));
-        window.location.href = "index.html";
+        window.location.href = "home.html";
       }
     });
     const loginLink = document.getElementById("login-link");
