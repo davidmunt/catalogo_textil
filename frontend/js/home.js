@@ -93,12 +93,6 @@ export class Home {
         localStorage.setItem("refProducto", JSON.stringify(product.refProducto));
         window.location.href = "producto.html";
       };
-      const btn = document.createElement("button");
-      btn.textContent = "Añadir al carrito";
-      btn.onclick = () => {
-        console.log(`Añadido: ${product.descripcion}`);
-      };
-      card.appendChild(btn);
       grid.appendChild(card);
     });
     container.appendChild(grid);

@@ -73,12 +73,10 @@ export class Api {
 
   async productGet(refProducto) {
     const url = `https://www.es-tela.com/api/?r=es/producto/${refProducto}&cli=003328&apikey=453971e94725572b4d171a6805d1fb95`;
-    console.log(url);
     try {
       const response = await fetch(url, {
         method: "GET",
       });
-      console.log(response);
       return await response.json();
     } catch (error) {
       console.error("Error al recibir productos", error);
@@ -92,9 +90,32 @@ export class Api {
       const response = await fetch(url, {
         method: "GET",
       });
-      return await response.json();
+      const respone = await response.json();
+      return respone;
     } catch (error) {
       console.error("Error al recibir productos", error);
+      throw error;
+    }
+  }
+
+  async addArticleToShoppingBag(refArticulo, cantidad, idUser) {
+    const url = this.url + "/article/addshop";
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          refArticulo,
+          cantidad,
+          idUser,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      return data.user;
+    } catch (error) {
+      console.error("Error en userLogin:", error);
       throw error;
     }
   }

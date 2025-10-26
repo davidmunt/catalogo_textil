@@ -2,12 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Login - Catálogo Textil</title>
+    <title>Product</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/producto.css" />
   </head>
   <body>
     <div class="product-container" id="product-container"></div>
+    <div class="selector-article-container" id="selector-article-container"></div>
+    <div class="article-container" id="article-container"></div>
   </body>
   <script type="module">
     import { Layout } from "./js/layout.js";
@@ -18,6 +21,8 @@
     (async () => {
       await product.init();
       product.paintProduct();
+      product.paintSelectorArticle();
+      product.paintArticle();
       layout.paintFooter();
     })();
   </script>
