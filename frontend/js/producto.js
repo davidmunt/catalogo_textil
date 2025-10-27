@@ -13,16 +13,13 @@ export class Product {
     try {
       const response = await this.getProduct(this.refProducto);
       this.product = response.data;
-      console.log(this.product);
       this.articles = Object.values(this.product.refArticulosHijos);
       if (this.articles.length === 0) {
-        console.log("El producto no tiene artículos hijos");
         return;
       }
       const primArticulo = this.articles[0];
       const articulo = await this.getArticle(primArticulo);
       this.article = articulo.data;
-      console.log(this.article);
     } catch (error) {
       console.error("Error al inicializar Product:", error);
     }
@@ -55,36 +52,6 @@ export class Product {
     title.id = "product-title";
     title.textContent = this.product.titulo;
     container.appendChild(title);
-
-    const desc = document.createElement("p");
-    desc.classList.add("product-desc");
-    desc.id = "product-desc";
-    desc.textContent = "Descricion: " + this.product.descripcion;
-    container.appendChild(desc);
-
-    const descSubfamilia = document.createElement("p");
-    descSubfamilia.classList.add("product-subfamily");
-    descSubfamilia.id = "product-subfamily";
-    descSubfamilia.textContent = "Subfamilia: " + this.product.descSubfamilia;
-    container.appendChild(descSubfamilia);
-
-    const textColores = document.createElement("p");
-    textColores.classList.add("product-colors-text");
-    textColores.id = "product-colors-text";
-    textColores.textContent = "Colores disponibles: ";
-    container.appendChild(textColores);
-    const coloresContainer = document.createElement("div");
-    coloresContainer.classList.add("product-colors-container");
-    coloresContainer.id = "product-colors";
-    this.product.colores.forEach((color) => {
-      const colorDiv = document.createElement("div");
-      colorDiv.classList.add("color-item");
-      const name = document.createElement("span");
-      name.textContent = color.descColor;
-      colorDiv.appendChild(name);
-      coloresContainer.appendChild(colorDiv);
-    });
-    container.appendChild(coloresContainer);
   }
 
   paintSelectorArticle() {
@@ -117,8 +84,11 @@ export class Product {
     btnComprar.classList.add("btn-buy");
     btnComprar.id = "btn-buy";
     btnComprar.textContent = "Añadir al Carrito";
-    btn.onclick = () => {
-      this.api.addArticleToShoppingBag(this.article.refArticulo, cantValor.value, this.userData.user_id);
+    btnComprar.onclick = () => {
+      const imagesArray = Object.values(this.article.imagenes);
+      const image = imagesArray[0];
+      const imageFinal = image.url_min;
+      api.addArticleToShoppingCart(this.article.refArticulo, cantValor.value, this.article.pvp, imageFinal, this.userData.user_id);
     };
     container.appendChild(btnComprar);
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Carrito</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/carrito.css" />
+  </head>
+  <body>
+    <div class="selector-view" id="selector-view"></div>
+    <div class="shopping-cart-container" id="shopping-cart-container"></div>
+  </body>
+  <script type="module">
+    import { Layout } from "./js/layout.js";
+    import { ShoppingCart } from "./js/carrito.js";
+    const layout = new Layout();
+    const shoppingCart = new ShoppingCart();
+    layout.paintHeader();
+    (async () => {
+      await shoppingCart.init();
+      shoppingCart.paintViewShopping();
+      shoppingCart.paintShoppingCart();
+      layout.paintFooter();
+    })();
+  </script>
+</html>

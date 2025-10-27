@@ -81,7 +81,7 @@ export class Layout {
     const footerContainer = document.createElement("footer");
     footerContainer.classList.add("main-footer");
     footerContainer.innerHTML = `
-      <p>&copy; ${new Date().getFullYear()} Catálogo Textil. Todos los derechos reservados.</p>
+      <p>&copy; ${new Date().getFullYear()} Catalogo Textil.</p>
       <p>Desarrollado por David Muntean</p>
     `;
     document.body.appendChild(footerContainer);

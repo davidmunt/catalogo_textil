@@ -1,4 +1,3 @@
-/* ====== RESET Y BASE ====== */
 * {
   margin: 0;
   padding: 0;
@@ -14,7 +13,6 @@ body {
   min-height: 100vh;
 }
 
-/* ====== HEADER ====== */
 .main-header {
   width: 100%;
   background-color: #0078ff;
@@ -42,7 +40,6 @@ body {
   transform: scale(1.05);
 }
 
-/* ====== NAVIGATION ====== */
 .nav-links {
   display: flex;
   gap: 15px;
@@ -64,7 +61,6 @@ body {
   color: #0078ff;
 }
 
-/* ====== USER ZONE ====== */
 .user-zone {
   display: flex;
   align-items: center;
@@ -101,7 +97,6 @@ body {
   color: white;
 }
 
-/* ====== FOOTER ====== */
 .main-footer {
   background-color: #222;
   color: #ccc;
@@ -119,22 +114,4 @@ body {
 .main-footer p:last-child {
   color: #0078ff;
   font-weight: 500;
-}
-
-/* ====== RESPONSIVE ====== */
-@media (max-width: 768px) {
-  .main-header {
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .user-zone {
-    flex-direction: column;
-  }
 }

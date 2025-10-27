@@ -1,4 +1,3 @@
-/* ===== FILTROS ===== */
 #home-filters {
   width: 100%;
   max-width: 1200px;
@@ -59,17 +58,4 @@
 
 #filter-form button:active {
   transform: translateY(0);
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  #filter-form {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  #filter-form select,
-  #filter-form button {
-    width: 100%;
-  }
 }

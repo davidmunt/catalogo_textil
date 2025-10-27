@@ -16,6 +16,7 @@ export class Api {
         },
       });
       const data = await response.json();
+      console.log(data.user);
       return data.user;
     } catch (error) {
       console.error("Error en userLogin:", error);
@@ -98,24 +99,58 @@ export class Api {
     }
   }
 
-  async addArticleToShoppingBag(refArticulo, cantidad, idUser) {
-    const url = this.url + "/article/addshop";
+  async addArticleToShoppingCart(refArticulo, cantidad, precio, imagen, idUser) {
+    const url = this.url + `/shoppingcart/${idUser}/add`;
     try {
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify({
-          refArticulo,
-          cantidad,
-          idUser,
+          article: {
+            refArticulo: refArticulo,
+            cantidad: cantidad,
+            precio: precio,
+            imagen: imagen,
+          },
         }),
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
-      return data.user;
+      return data;
     } catch (error) {
-      console.error("Error en userLogin:", error);
+      console.error("Error en addArticleToShoppingCart:", error);
+      throw error;
+    }
+  }
+
+  async deleteArticleFromShoppingCart(refArticulo, idUser) {
+    const url = this.url + `/shoppingcart/${idUser}/${refArticulo}/`;
+    try {
+      const response = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error en deleteArticleFromShoppingCart:", error);
+      throw error;
+    }
+  }
+
+  async getUserShoppingCart(idUser) {
+    const url = `${this.url}/shoppingcart/${idUser}`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error en getUserShoppingCart:", error);
       throw error;
     }
   }
