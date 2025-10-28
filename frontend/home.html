@@ -11,6 +11,7 @@
   <body>
     <div class="home-filters" id="home-filters"></div>
     <div class="home-container" id="home-container"></div>
+    <div class="home-last-seen" id="home-last-seen"></div>
   </body>
   <script type="module">
     import { Layout } from "./js/layout.js";
@@ -22,6 +23,7 @@
       await home.init();
       home.paintFilter();
       home.paintProducts();
+      home.paintLastSeenProducts();
       layout.paintFooter();
     })();
   </script>

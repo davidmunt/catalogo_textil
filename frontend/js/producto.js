@@ -58,7 +58,6 @@ export class Product {
     const container = document.getElementById("selector-article-container");
     container.innerHTML = "";
 
-    //selector cantidad
     const divCant = document.createElement("div");
 
     const cantTexto = document.createElement("label");
@@ -79,7 +78,6 @@ export class Product {
     divCant.appendChild(cantValor);
     container.appendChild(divCant);
 
-    //boton añadir carrito
     const btnComprar = document.createElement("button");
     btnComprar.classList.add("btn-buy");
     btnComprar.id = "btn-buy";
@@ -92,7 +90,6 @@ export class Product {
     };
     container.appendChild(btnComprar);
 
-    //selector articulo
     const articuloSelectordiv = document.createElement("div");
 
     const articuloTexto = document.createElement("label");

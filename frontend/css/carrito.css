@@ -129,3 +129,32 @@
   overflow-y: auto;
   padding-right: 0.5rem;
 }
+
+.purchase-container {
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  background-color: #fefefe;
+}
+
+.purchase-container > div:first-child {
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #333;
+}
+
+.purchase-container .shoppingcart-articles {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.purchase-container .shoppingcart-total {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-top: 0.8rem;
+  text-align: right;
+  color: #222;
+}

@@ -4,6 +4,9 @@ export class Home {
   constructor() {
     this.families = [];
     this.products = [];
+    this.productsVistos = [];
+    this.productsVistosFinal = [];
+    this.userData = JSON.parse(localStorage.getItem("User"));
   }
 
   async init() {
@@ -14,6 +17,13 @@ export class Home {
       const refSubfamilia = firstSubfamily.refsubfamilia;
       const productos = await this.getProducts(refSubfamilia);
       this.products = productos.data;
+      const prodVistos = await this.getLastSeenProducts();
+      this.productsVistos = prodVistos.data.lastSeen || [];
+      this.productsVistosFinal = [];
+      for (const prod of this.productsVistos) {
+        const prodData = await api.productGet(prod.productId);
+        if (prodData) this.productsVistosFinal.push(prodData);
+      }
     } catch (error) {
       console.error("Error al inicializar Home:", error);
     }
@@ -34,6 +44,15 @@ export class Home {
       return { success: true, data: response };
     } catch (error) {
       return { success: false, message: "Error al recibir productos" };
+    }
+  }
+
+  async getLastSeenProducts() {
+    try {
+      const response = await api.getLastSeenByUser(this.userData.user_id);
+      return { success: true, data: response };
+    } catch (error) {
+      return { success: false, message: "Error al recibir productos vistos recientemente" };
     }
   }
 
@@ -86,15 +105,60 @@ export class Home {
       const title = document.createElement("h3");
       title.textContent = product.descripcion || "Producto sin nombre";
       card.appendChild(title);
-      const price = document.createElement("p");
-      price.textContent = product.precio ? `${product.precio} €` : "Precio no disponible";
-      card.appendChild(price);
-      card.onclick = () => {
+      card.onclick = async () => {
+        await api.productSeenByUser(product.refProducto, this.userData.user_id);
         localStorage.setItem("refProducto", JSON.stringify(product.refProducto));
         window.location.href = "producto.html";
       };
       grid.appendChild(card);
     });
+    container.appendChild(grid);
+  }
+
+  paintLastSeenProducts() {
+    const container = document.getElementById("home-last-seen");
+    container.innerHTML = "";
+
+    if (!this.productsVistosFinal || this.productsVistosFinal.length === 0) {
+      container.innerHTML = `<p>No hay productos vistos recientemente.</p>`;
+      return;
+    }
+
+    const lastseen = document.createElement("h2");
+    lastseen.textContent = "Productos vistos recientemente";
+    container.appendChild(lastseen);
+
+    const grid = document.createElement("div");
+    grid.classList.add("products-grid");
+
+    this.productsVistosFinal.forEach((product) => {
+      const card = document.createElement("div");
+      card.classList.add("product-card");
+
+      const img = document.createElement("img");
+
+      if (product.imagenes && Object.keys(product.imagenes).length > 0) {
+        const firstImageKey = Object.keys(product.imagenes)[0];
+        img.src = product.imagenes[firstImageKey]?.url_min || "img/no-image.png";
+      } else {
+        img.src = "img/no-image.png";
+      }
+
+      img.alt = product.descripcion || "Producto";
+      card.appendChild(img);
+
+      const title = document.createElement("h3");
+      title.textContent = product.descripcion || "Producto sin nombre";
+      card.appendChild(title);
+
+      card.onclick = () => {
+        localStorage.setItem("refProducto", JSON.stringify(product.refProducto));
+        window.location.href = "producto.html";
+      };
+
+      grid.appendChild(card);
+    });
+
     container.appendChild(grid);
   }
 }

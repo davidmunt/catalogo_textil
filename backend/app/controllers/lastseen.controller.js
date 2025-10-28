@@ -20,8 +20,20 @@ const getLastSeenProducts = asyncHandler(async (req, res) => {
   if (!userId) {
     return res.status(400).json({ message: "Se requiere userId" });
   }
-  const lastSeenItems = await LastSeen.find({ userId }).sort({ createdAt: -1 }).limit(10).exec();
-  const response = await Promise.all(lastSeenItems.map((item) => item.toLastSeenResponse()));
+
+  const lastSeenItems = await LastSeen.find({ userId }).sort({ createdAt: -1 }).exec();
+
+  const seenProductsMap = new Map();
+  for (const item of lastSeenItems) {
+    if (!seenProductsMap.has(item.productId.toString())) {
+      seenProductsMap.set(item.productId.toString(), item);
+    }
+  }
+
+  const uniqueLastSeenItems = Array.from(seenProductsMap.values()).slice(0, 6);
+
+  const response = await Promise.all(uniqueLastSeenItems.map((item) => item.toLastSeenResponse()));
+
   res.status(200).json({ lastSeen: response });
 });
 

@@ -32,7 +32,7 @@ mongoose
 
 require("../routes/user.router.js")(app);
 require("../routes/shoppingcart.router.js")(app);
-//require("../routes/lastseen.router.js")(app);
+require("../routes/lastseen.router.js")(app);
 require("../routes/purchases.router.js")(app);
 
 app.listen(process.env.PORT, () => {

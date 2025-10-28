@@ -154,4 +154,67 @@ export class Api {
       throw error;
     }
   }
+
+  async createPurchasebyUser(idUser) {
+    const url = this.url + `/purchases/checkout/${idUser}`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error en createPurchasebyUser:", error);
+      throw error;
+    }
+  }
+
+  async getPurchasesByUser(idUser) {
+    const url = `${this.url}/purchases/${idUser}`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error en getPurchasesByUser:", error);
+      throw error;
+    }
+  }
+
+  async productSeenByUser(refProducto, idUser) {
+    const url = this.url + `/lastseen/productseen`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: JSON.stringify({
+          userId: idUser,
+          productId: refProducto,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error en productSeenByUser:", error);
+      throw error;
+    }
+  }
+
+  async getLastSeenByUser(idUser) {
+    const url = `${this.url}/lastseen/${idUser}`;
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+      });
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error en getLastSeenByUser:", error);
+      throw error;
+    }
+  }
 }

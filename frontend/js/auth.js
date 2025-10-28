@@ -3,7 +3,6 @@ const api = new Api();
 export class Auth {
   constructor() {}
 
-  //logica
   async login(username, password) {
     if (!username || !password) {
       return { success: false, message: "Todos los campos son obligatorios" };
@@ -52,7 +51,6 @@ export class Auth {
     }
   }
 
-  //diseño
   paintLogin() {
     let loginContainer = document.getElementById("login-container");
     loginContainer.innerHTML = "";
